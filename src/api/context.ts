@@ -37,7 +37,7 @@ export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T |
         return () => {
             Ticker.removeListener(doRequest)
         }
-    }, [])
+    }, [doRequest])
 
     return [response, error]
 }
