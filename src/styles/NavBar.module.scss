@@ -8,7 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px $navbar-progress-bar-height;
+  padding: 0 4rem $navbar-progress-bar-height;
+
+  @media (max-width: 800px) {
+    padding: 0 2rem $navbar-progress-bar-height;
+  }
 
   .title {
     color: white;
@@ -16,6 +20,91 @@
     a {
       color: white;
       text-decoration: none;
+    }
+  }
+
+  .desktopMenuItems {
+    list-style-type: none;
+    padding: 0;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    li {
+      display: inline-block;
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+
+      font-size: 1.1rem;
+
+      a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+
+        &:hover, &.active {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .mobileMenuLink {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    background: rgba(255, 255, 255, 0.2) none;
+    border: none;
+    outline: none;
+
+    padding: 0.6rem 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+
+    .mobileMenuIcon {
+      color: white;
+      font-size: 1rem;
+    }
+  }
+
+  .mobileMenu {
+    position: fixed;
+    height: 0;
+    width: 100%;
+    top: $navbar-height - $navbar-progress-bar-height;
+    left: 0;
+
+    overflow: hidden;
+    transition: height 200ms ease-in-out;
+
+    &.show {
+      height: calc(100vh - #{$navbar-height - $navbar-progress-bar-height});
+    }
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    background-color: $primary-color;
+    z-index: 1;
+
+    ul {
+      list-style-type: none;
+      padding: 0 1.5rem;
+
+      li {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      }
     }
   }
 

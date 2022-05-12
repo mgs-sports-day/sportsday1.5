@@ -6,6 +6,7 @@ import GSheetsAPI from 'mgssportsday-api';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './styles/general.scss';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -20,6 +21,8 @@ root.render(
                     <Route path="/" element={<App />}>
                         <Route index element={<Home />} />
                     </Route>
+
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
         </ApiContext.Provider>
