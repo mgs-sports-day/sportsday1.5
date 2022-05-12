@@ -1,33 +1,23 @@
 import React, { useEffect } from 'react';
-import { useApi } from './api/context';
+import NavBar from './components/NavBar';
+import { Outlet } from 'react-router-dom';
+import { Ticker } from './api/ticker';
+import styles from './styles/App.module.scss';
 
 function App() {
-    const api = useApi()
     useEffect(() => {
-        api.getYearGroupRecords(7)
-            .then(events => {
-                const event = events[0]
-                console.log(event)
-            })
+        const ticker = new Ticker(30 * 1000)
+        return () => {
+            ticker.cancelEmitter()
+        }
     }, [])
 
-    return (
-        <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+    return <>
+        <NavBar />
+        <div className={styles.container}>
+            <Outlet />
         </div>
-    )
+    </>
 }
 
 export default App

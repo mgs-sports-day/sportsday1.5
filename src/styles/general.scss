@@ -1,0 +1,14 @@
+@import "variables";
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, li, td {
+  font-family: $font-stack;
+}
