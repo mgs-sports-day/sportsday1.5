@@ -1,0 +1,19 @@
+@import "mixins";
+
+.semantic {
+  margin: 2rem 0;
+
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 2rem;
+  }
+
+  .disclaimer {
+    color: gray;
+    a {
+      @include link;
+    }
+  }
+}

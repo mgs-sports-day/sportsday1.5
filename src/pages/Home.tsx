@@ -1,29 +1,63 @@
 import { useApiQuery } from '../api/context';
 import { formLabel } from '../api/helpers';
+import { Table, TableRow } from '../components/Table';
+import { useMemo, useState } from 'react';
+import { sortBy } from 'lodash-es';
+import Button from '../components/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
-    const [summary] = useApiQuery((api) => api.getSummaryStandings())
+    const [summary] = useApiQuery(api => api.getSummaryStandings())
+    const sortedSummary = useMemo(() => {
+        if (!summary) {
+            return undefined
+        }
+
+        return sortBy(summary, 'schoolPos')
+    }, [summary])
+
+    const [expanded, setExpanded] = useState(false)
+    const filteredSummary = useMemo(() => {
+        if (expanded) {
+            return sortedSummary
+        } else {
+            return sortedSummary?.slice(0, 5)
+        }
+    }, [sortedSummary, expanded])
 
     return <>
         <h1>Welcome to MGS Sports Day 2022!</h1>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Form</th>
-                <th>Year position</th>
-                <th>School position</th>
-                <th>Total points</th>
-            </tr>
-            </thead>
-            <tbody>
-            {summary?.map(results => <tr key={formLabel(results)}>
-                <td>{formLabel(results)}</td>
-                <td>{results.yearPos}</td>
-                <td>{results.schoolPos}</td>
-                <td>{results.points}</td>
-            </tr>)}
-            </tbody>
-        </table>
+        <p>
+            This page shows all forms, across the entire school in <strong>rank</strong> order.
+            For more details, please visit the individual <Link to="/forms">forms</Link> and <Link to="/events">events</Link> pages.
+        </p>
+
+        <p>
+            Forms with 0 points are not ranked.
+        </p>
+
+        <Table
+            columns={['Form', 'Year rank', 'School rank', 'Total points']}
+        >
+            {filteredSummary?.map(results => <TableRow
+                key={formLabel(results)}
+                columns={[
+                    {value: formLabel(results)},
+                    {value: results.yearPos, autoHighlight: true},
+                    {value: results.schoolPos, autoHighlight: true},
+                    {value: results.points},
+                ]}
+            />)}
+        </Table>
+
+        <Button
+            onClick={() => setExpanded(!expanded)}
+        >
+            <FontAwesomeIcon icon={expanded ? faMinus : faPlus} />&nbsp;
+            {expanded ? 'Show less' : 'Show all'}
+        </Button>
     </>
 }

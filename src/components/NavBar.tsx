@@ -14,6 +14,7 @@ const MenuItems: [string, string][] = [
 ]
 
 export default function NavBar() {
+    const [refreshInterval] = useState(Ticker.getRefreshInterval())
     const [completion, setCompletion] = useState(0)
     useEffect(() => {
         Ticker.addCompletionListener(setCompletion)
@@ -30,14 +31,13 @@ export default function NavBar() {
         </Link>
     </li>)
 
+    const roundedTime = Math.ceil(completion * refreshInterval / 1000)
     return <nav className={styles.nav}>
-        <div>
-            <h1 className={styles.title}>
-                <Link to="/">
-                    MGS Sports Day
-                </Link>
-            </h1>
-        </div>
+        <h1 className={styles.title}>
+            <Link to="/">
+                MGS Sports Day
+            </Link>
+        </h1>
 
         <ul className={styles.desktopMenuItems}>
             {menuItemList}
@@ -59,7 +59,13 @@ export default function NavBar() {
             </ul>
         </div>
 
-        <div className={styles.progressBarContainer}>
+        <div
+            className={styles.progressBarContainer}
+            role='progressbar'
+            aria-valuemax={refreshInterval / 1000}
+            aria-valuenow={roundedTime}
+            aria-valuetext={'Refreshing in ' + (20 - roundedTime) + 's'}
+        >
             <div
                 className={styles.progressBar}
                 style={{

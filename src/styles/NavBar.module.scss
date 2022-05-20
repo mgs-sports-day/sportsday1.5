@@ -1,4 +1,11 @@
 @import "variables";
+@import "mixins";
+
+@mixin navbar-accessibility-shadow {
+  &:focus {
+    @include accessibility-shadow(rgba(255, 255, 255, 0.5))
+  }
+}
 
 .nav {
   width: 100%;
@@ -16,10 +23,20 @@
 
   .title {
     color: white;
+    font-size: 2rem;
+
+    @media (max-width: 420px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 300px) {
+      font-size: 1rem;
+    }
 
     a {
       color: white;
       text-decoration: none;
+      @include navbar-accessibility-shadow;
     }
   }
 
@@ -46,6 +63,8 @@
         &:hover, &.active {
           color: white;
         }
+
+        @include navbar-accessibility-shadow;
       }
     }
   }

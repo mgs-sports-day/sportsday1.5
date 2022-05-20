@@ -8,6 +8,11 @@ import './styles/general.scss';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
+import EventsList from './pages/Event/EventsList';
+import EventOverview from './pages/Event/EventOverview';
+import FormsList from './pages/Form/FormsList';
+import FormOverview from './pages/Form/FormOverview';
+import RecordsOverview from './pages/RecordsOverview';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -22,6 +27,14 @@ root.render(
                     <Route path="/" element={<App />}>
                         <Route index element={<Home />} />
                         <Route path="about" element={<About />} />
+
+                        <Route path="events" element={<EventsList />} />
+                        <Route path="events/:eventId" element={<EventOverview />} />
+
+                        <Route path="forms" element={<FormsList />} />
+                        <Route path="forms/:formId" element={<FormOverview />} />
+
+                        <Route path="records" element={<RecordsOverview />} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />

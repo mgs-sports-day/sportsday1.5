@@ -14,15 +14,19 @@ const useApi = () => {
     return context
 }
 
-export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T | undefined, Error | undefined] => {
+// Pass all API calls through this to make sure they get reloaded at the regular interval specified in App.tsx via Ticker.
+export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T | undefined, boolean, Error | undefined] => {
     const [response, setResponse] = useState<T | undefined>(undefined)
+    const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<Error | undefined>(undefined)
     const apiContext = useApi()
 
     const doRequest = useCallback(async () => {
         try {
+            setLoading(true)
             const response = await generator(apiContext)
             setResponse(response)
+            setLoading(false)
         } catch (e) {
             setError(e as Error)
         }
@@ -39,5 +43,5 @@ export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T |
         }
     }, [])
 
-    return [response, error]
+    return [response, loading, error]
 }

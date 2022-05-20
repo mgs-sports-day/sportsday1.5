@@ -1,23 +1,26 @@
 import EventEmitter from 'events';
 
+// Ticker coordinates regularly-timed API call reloads from a central source, meaning everything is in sync.
+// There's only supposed to be one single Ticker for the entire app, which is initialised in App.tsx
 export class Ticker {
     private static readonly eventEmitter = new EventEmitter().setMaxListeners(Infinity)
     private static generatorExists: boolean = false
+    // must be a multiple of 10
+    private static readonly duration = 20 * 1000
     private readonly interval: number
 
-    constructor(interval: number) {
+    constructor() {
         if (Ticker.generatorExists) throw new Error("cannot initialise multiple ticker generators")
-        if (interval % 10 !== 0) throw new Error("interval must be multiple of 10")
 
         let completion = 0
         this.interval = window.setInterval(() => {
             completion += 10
-            if (completion >= interval) {
+            if (completion >= Ticker.duration) {
                 completion = 0
                 Ticker.eventEmitter.emit("refresh")
             }
 
-            Ticker.eventEmitter.emit("completion", completion / interval)
+            Ticker.eventEmitter.emit("completion", completion / Ticker.duration)
         }, 10)
         Ticker.generatorExists = true
     }
@@ -46,5 +49,9 @@ export class Ticker {
 
     static removeCompletionListener(listener: (completed: number) => void) {
         Ticker.eventEmitter.removeListener("completion", listener)
+    }
+
+    static getRefreshInterval() {
+        return Ticker.duration
     }
 }

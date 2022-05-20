@@ -1,0 +1,21 @@
+@import "variables";
+
+.default {
+  margin: 0.5rem 0;
+  outline: none;
+  font-size: 1rem;
+
+  background: $primary-color-surface;
+  color: $primary-color-surface-text;
+
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid $primary-color;
+
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+  &:hover {
+    background-color: $primary-color;
+    color: white;
+  }
+}
