@@ -21,6 +21,8 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
+        env:
+          CI: false
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
