@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function Home() {
     const [summary] = useApiQuery(api => api.getSummaryStandings())
@@ -28,6 +29,8 @@ export default function Home() {
     }, [sortedSummary, expanded])
 
     return <>
+        <Breadcrumb paths={[]} current='Home' />
+
         <h1>Welcome to MGS Sports Day 2022!</h1>
 
         <p>

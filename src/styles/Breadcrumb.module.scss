@@ -1,0 +1,26 @@
+@import "variables";
+
+.breadcrumb {
+  border: 1px solid $primary-color;
+  background-color: $primary-color-surface;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+
+  a, p {
+    display: inline-block;
+    margin: 0;
+    color: $primary-color-surface-text;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+
+      &::after {
+        content: '❯';
+        display: inline-block;
+        margin-left: 0.5rem;
+        text-decoration: none;
+        color: $primary-color;
+      }
+    }
+  }
+}

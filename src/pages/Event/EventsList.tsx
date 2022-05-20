@@ -5,11 +5,19 @@ import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function EventsList() {
     const navigate = useNavigate()
 
     return <>
+        <Breadcrumb
+            paths={[
+                { name: 'Home', link: '/' },
+            ]}
+            current='Events'
+        />
+
         <h1>
             <FontAwesomeIcon icon={faTrophy} /> All events
         </h1>

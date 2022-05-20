@@ -1,8 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function About() {
     return <>
+        <Breadcrumb
+            paths={[
+                { name: 'Home', link: '/' },
+            ]}
+            current='About'
+        />
+
         <h1>
             <FontAwesomeIcon icon={faInfoCircle}/> About MGS Sports Day
         </h1>
