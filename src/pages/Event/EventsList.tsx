@@ -21,8 +21,10 @@ export default function EventsList() {
             ]}
             widths={['80%', '20%']}
         >
-            {Object.values(SportEventName).map(eventId => <TableRow columns={[
-                { value: eventIdToName(eventId) },
+            {Object.values(SportEventName).map(eventId => <TableRow key={eventId} columns={[
+                <p>
+                    <strong>{eventIdToName(eventId)}</strong>
+                </p>,
                 <Button onClick={() => navigate(`/events/${eventId}`)}>
                     View event
                 </Button>

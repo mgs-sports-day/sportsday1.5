@@ -99,12 +99,19 @@ export default function About() {
             Privacy
         </h2>
         <p>
-            <strong>This site collects no personal data about its users.</strong> We use a tiny custom analytics system
-            with the sole purpose of counting real-time users, their browsers, their operating systems, and the pages
-            they are visiting. No personal data is sent to our analytics system.
+            <strong>This site collects no personal data about its users.</strong> We use a&nbsp;
+            <a
+                href='https://replit.com/@palk/SportsDayAnalytics#index.js'
+                target='_blank'
+                rel='noreferrer'
+            >
+                tiny custom analytics system
+            </a> with the sole purpose of counting real-time users, their browsers, their operating systems, and the
+            pages they are visiting. We use this data to see how people interact with the site and thus what we need to
+            improve on for next year.
         </p>
         <p>
-
+            The site does not store cookies or any other form of persistent data on your device.
         </p>
         <p>
             All results and records data on the site is covered under the school's Privacy Notice, which can be accessed

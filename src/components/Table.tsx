@@ -51,10 +51,8 @@ export function TableRow(
     }
 ) {
     return <tr>
-        {columns.map((value, index) => {
-            return isReactElement(value) ? value : <td key={index}>
-                {value.value}
-            </td>
-        })}
+        {columns.map((value, index) => <td key={index}>
+            {isReactElement(value) ? value : value.value}
+        </td>)}
     </tr>
 }
