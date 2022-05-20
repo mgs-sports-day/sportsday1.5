@@ -29,17 +29,22 @@ h1 {
     vertical-align: -0.1em;
     color: $accent-color;
   }
+
+  span {
+    color: gray;
+    font-size: 2rem;
+    display: block;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
-p {
+p, td, th {
   line-height: 1.5em;
   color: #212529;
   font-size: 1rem;
-  font-weight: 400;
 
   a {
     @include link;

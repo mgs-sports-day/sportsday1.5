@@ -1,5 +1,5 @@
 import { useApiQuery } from '../api/context';
-import { formLabel } from '../api/helpers';
+import { formLabel, formToLink } from '../api/helpers';
 import { Table, TableRow } from '../components/Table';
 import { useMemo, useState } from 'react';
 import { sortBy } from 'lodash-es';
@@ -40,12 +40,19 @@ export default function Home() {
         </p>
 
         <Table
-            columns={['Form', 'Year rank', 'School rank', 'Total points']}
+            header={[
+                { text: 'Form' },
+                { text: 'Year rank' },
+                { text: 'School rank' },
+                { text: 'Total points' },
+            ]}
         >
             {filteredSummary?.map(results => <TableRow
                 key={formLabel(results)}
                 columns={[
-                    {value: formLabel(results)},
+                    <Link to={formToLink(results)}>
+                        {formLabel(results)}
+                    </Link>,
                     {value: results.yearPos, autoHighlight: true},
                     {value: results.schoolPos, autoHighlight: true},
                     {value: results.points},

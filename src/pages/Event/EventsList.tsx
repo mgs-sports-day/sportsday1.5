@@ -15,11 +15,10 @@ export default function EventsList() {
         </h1>
 
         <Table
-            columns={[
-                'Event name',
-                'View'
+            header={[
+                { text: 'Event name', width: '80%' },
+                { text: 'View', width: '20%' },
             ]}
-            widths={['80%', '20%']}
         >
             {Object.values(SportEventName).map(eventId => <TableRow key={eventId} columns={[
                 <p>

@@ -1,31 +1,46 @@
 import styles from '../styles/Table.module.scss'
 import type { ReactElement, ReactNode } from 'react';
 
+export interface ColumnConfig {
+    text?: string
+    width?: number | string
+    rowSpan?: number
+    colSpan?: number
+}
+
 export function Table(
     {
         children,
-        columns,
-        widths,
+        header,
+        secondaryHeader,
     }: {
         children: ReactNode,
-        columns: string[],
-        widths?: (string | number)[],
+        header?: ColumnConfig[],
+        secondaryHeader?: ColumnConfig[],
     }
 ) {
+    const getColumns = (columnList: ColumnConfig[]) => {
+        return <tr>
+            {columnList.map((column, index) => <th
+                key={index}
+                style={{
+                    width: column.width,
+                }}
+                rowSpan={column.rowSpan}
+                colSpan={column.colSpan}
+            >
+                {column.text}
+            </th>)}
+        </tr>
+    }
+
     return <div className={styles.responsiveContainer}>
         <table className={styles.table}>
             <thead>
-            <tr>
-                {columns.map((column, index) => <th
-                    key={column}
-                    style={{
-                        width: widths && (index < widths.length) ? widths[index] : undefined,
-                    }}
-                >
-                    {column}
-                </th>)}
-            </tr>
+            {header !== undefined && getColumns(header)}
+            {secondaryHeader !== undefined && getColumns(secondaryHeader)}
             </thead>
+
             <tbody>
             {children}
             </tbody>

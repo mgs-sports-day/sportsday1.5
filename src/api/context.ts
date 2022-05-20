@@ -23,10 +23,8 @@ export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T |
 
     const doRequest = useCallback(async () => {
         try {
-            setLoading(true)
             const response = await generator(apiContext)
             setResponse(response)
-            setLoading(false)
         } catch (e) {
             setError(e as Error)
         }
@@ -35,13 +33,14 @@ export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T |
     useEffect(() => {
         doRequest()
             .then(() => {
+                setLoading(false)
                 Ticker.addListener(doRequest)
             })
 
         return () => {
             Ticker.removeListener(doRequest)
         }
-    }, [])
+    }, [apiContext])
 
     return [response, loading, error]
 }
