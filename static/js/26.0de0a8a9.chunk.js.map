@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/26.0de0a8a9.chunk.js","mappings":"0KAAe,SAASA,IACpB,OAAO,iCACH,kDAEA","sources":["pages/About.tsx"],"sourcesContent":["export default function About() {\n    return <>\n        <h1>About MGS Sports Day</h1>\n\n        <p>\n            Add more information here\n        </p>\n    </>\n}\n"],"names":["About"],"sourceRoot":""}

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksportsday1_5=self.webpackChunksportsday1_5||[]).push([[26],{2026:function(r,n,e){e.r(n),e.d(n,{default:function(){return t}});var s=e(184);function t(){return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)("h1",{children:"About MGS Sports Day"}),(0,s.jsx)("p",{children:"Add more information here"})]})}}}]);
-//# sourceMappingURL=26.0de0a8a9.chunk.js.map
