@@ -22,12 +22,26 @@ h1, h2, h3, h4, h5, h6, a, p, li, td, th, button {
 
 h1 {
   font-size: 2.5rem;
+
+  svg.svg-inline--fa {
+    margin-right: 0.5rem;
+    font-size: 2.25rem;
+    vertical-align: -0.1em;
+    color: $accent-color;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
-p a {
-  @include link;
+p {
+  line-height: 1.5em;
+  color: #212529;
+  font-size: 1rem;
+  font-weight: 400;
+
+  a {
+    @include link;
+  }
 }
