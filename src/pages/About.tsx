@@ -119,7 +119,10 @@ export default function About() {
             improve on for next year.
         </p>
         <p>
-            The site does not store cookies or any other form of persistent data on your device.
+            The site does not store cookies on your device. It stores cached data from the spreadsheet in your
+            browser's <code>localStorage</code>. This information cannot be accessed by other websites and is used to
+            improve the site's performance and reduce the chance of requests failing due to Google Sheets' rate
+            limiting system.
         </p>
         <p>
             All results and records data on the site is covered under the school's Privacy Notice, which can be accessed

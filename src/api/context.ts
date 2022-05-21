@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import GSheetsAPI from 'mgssportsday-api';
 import { Ticker } from './ticker';
+import { RequestBuilder } from 'mgssportsday-api/dist/cache';
 
 const ApiContext = createContext<GSheetsAPI | undefined>(undefined)
 export default ApiContext
@@ -15,32 +16,37 @@ const useApi = () => {
 }
 
 // Pass all API calls through this to make sure they get reloaded at the regular interval specified in App.tsx via Ticker.
-export const useApiQuery = <T>(generator: (api: GSheetsAPI) => Promise<T>): [T | undefined, boolean, Error | undefined] => {
+export const useApiQuery = <T>(generator: (api: GSheetsAPI) => RequestBuilder<T>): [T | undefined, boolean, Error | undefined] => {
     const [response, setResponse] = useState<T | undefined>(undefined)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<Error | undefined>(undefined)
     const apiContext = useApi()
 
-    const doRequest = useCallback(async () => {
+    const doRequest = useCallback(async (allowCache: boolean) => {
         try {
-            const response = await generator(apiContext)
+            const response = await generator(apiContext).run(allowCache)
             setResponse(response)
         } catch (e) {
             setError(e as Error)
         }
-    }, [apiContext])
+    }, [])
+
+    const doRequestNoCache = useCallback(
+        () => doRequest(false),
+        [],
+    )
 
     useEffect(() => {
-        doRequest()
+        doRequest(true)
             .then(() => {
                 setLoading(false)
-                Ticker.addListener(doRequest)
             })
 
+        Ticker.addListener(doRequestNoCache)
         return () => {
-            Ticker.removeListener(doRequest)
+            Ticker.removeListener(doRequestNoCache)
         }
-    }, [apiContext])
+    }, [])
 
     return [response, loading, error]
 }
