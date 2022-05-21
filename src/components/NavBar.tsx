@@ -5,7 +5,7 @@ import { Ticker } from '../api/ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 
-const MenuItems: [string, string][] = [
+export const MenuItems: [string, string][] = [
     ["Home", "/"],
     ["Events", "/events"],
     ["Forms", "/forms"],

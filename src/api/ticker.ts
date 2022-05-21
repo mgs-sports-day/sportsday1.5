@@ -6,7 +6,7 @@ export class Ticker {
     private static readonly eventEmitter = new EventEmitter().setMaxListeners(Infinity)
     private static generatorExists: boolean = false
     // must be a multiple of 10
-    private static readonly duration = 20 * 1000
+    private static readonly duration = 1 * 60 * 1000
     private readonly interval: number
 
     constructor() {
