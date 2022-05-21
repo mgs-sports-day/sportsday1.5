@@ -1,11 +1,18 @@
 import { io, Socket } from 'socket.io-client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function useAnalytics() {
     const [socket, setSocket] = useState<Socket | undefined>(undefined)
 
     const location = useLocation()
+    const sendPageview = useCallback(() => {
+        if (!socket) return
+        socket.emit('pageview', {
+            path: location.pathname,
+        })
+    }, [location.pathname, socket])
+
     useEffect(() => {
         const s = io("https://SportsDayAnalytics.palk.repl.co", {
             // required for CORS
@@ -14,15 +21,15 @@ export default function useAnalytics() {
             transports: ['websocket', 'polling'],
         })
         setSocket(s)
+
+        s.on('reconnect', sendPageview)
         return () => {
+            s.off('reconnect', sendPageview)
             s.close()
         }
     }, [])
 
     useEffect(() => {
-        if (!socket) return
-        socket.emit('pageview', {
-            path: location.pathname,
-        })
+        sendPageview()
     }, [location.pathname, socket])
 }
