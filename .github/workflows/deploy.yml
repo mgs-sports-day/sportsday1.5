@@ -26,6 +26,7 @@ jobs:
 
       - name: Create 404.html for catch-all redirect
         run: cp index.html 404.html
+        working-directory: ./build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

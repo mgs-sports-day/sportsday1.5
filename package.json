@@ -18,10 +18,10 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
-    "@types/node": "^16.7.13",
+    "@types/node": "^16.11.36",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "sass": "^1.51.0"
+    "@types/react-dom": "^18.0.4",
+    "sass": "^1.52.1"
   },
   "scripts": {
     "start": "react-scripts start",
