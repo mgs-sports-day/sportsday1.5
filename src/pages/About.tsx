@@ -69,35 +69,47 @@ export default function About() {
 
             <ul>
                 <li>
-                    Font Awesome<br/>
+                    Font Awesome for rendering icons and making the UI look pretty<br/>
                     Font Awesome Free License
                 </li>
                 <li>
-                    Browserify <code>events</code><br/>
+                    Browserify <code>events</code> for using the Node.JS API in-browser to synchronise periodic reloading of data<br/>
                     MIT License
                 </li>
                 <li>
-                    <code>lodash</code><br/>
+                    <code>lodash</code> for some additional data manipulation at the rendering stage<br/>
                     MIT License
                 </li>
                 <li>
-                    Facebook <code>react</code> and <code>react-dom</code><br/>
+                    Facebook <code>react</code> and <code>react-dom</code> for rendering the site itself<br/>
                     MIT License
                 </li>
                 <li>
-                    Remix <code>react-router-dom</code><br/>
+                    Remix <code>react-router-dom</code> for managing frontend routing<br/>
                     MIT License
                 </li>
                 <li>
-                    Microsoft <code>typescript</code> (for compiling)<br/>
+                    Microsoft <code>typescript</code> for compiling source code<br/>
                     MIT License
                 </li>
                 <li>
-                    <code>sass</code><br/>
+                    <code>sass</code> for compiling stylesheets<br/>
                     MIT License
                 </li>
                 <li>
-                    <code>socket.io</code><br/>
+                    <code>socket.io</code> for communicating with the analytics server<br/>
+                    MIT License
+                </li>
+                <li>
+                    <code>axios</code> for making GET requests to the Google Sheets API<br/>
+                    MIT License
+                </li>
+                <li>
+                    <code>md5</code> for generating hashes to use with the site's caching system<br/>
+                    BSD-3-Clause License
+                </li>
+                <li>
+                    <code>underscore</code> for data manipulation used throughout the site's Google Sheets API wrapper<br/>
                     MIT License
                 </li>
             </ul>
