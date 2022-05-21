@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksportsday1_5=self.webpackChunksportsday1_5||[]).push([[48],{8048:function(e,n,r){r.r(n),r.d(n,{default:function(){return c}});var s=r(3378),t=r(184);function c(){return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(s.Z,{paths:[{name:"Home",link:"/"}],current:"Records"}),(0,t.jsx)("h1",{children:"Records"})]})}}}]);
-//# sourceMappingURL=48.9847d5cb.chunk.js.map
