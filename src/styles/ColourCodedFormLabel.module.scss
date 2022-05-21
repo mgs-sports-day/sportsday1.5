@@ -1,0 +1,21 @@
+@import "mixins";
+
+.label {
+  @include link;
+
+  $color-map: (
+          y7: #4e0060,
+          y8: #3d7232,
+          y9: #563c19,
+          y10: #236f6c
+  );
+
+  @each $year, $color in $color-map {
+    &.#{$year} {
+      color: $color;
+      &:hover {
+        color: adjust-color($color, $lightness: 35%);
+      }
+    }
+  }
+}

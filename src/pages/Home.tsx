@@ -1,5 +1,5 @@
 import { useApiQuery } from '../api/context';
-import { formLabel, formToLink } from '../api/helpers';
+import { formLabel } from '../api/helpers';
 import { Table, TableRow } from '../components/Table';
 import { useMemo, useState } from 'react';
 import { sortBy } from 'lodash-es';
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import HomeMobileMenu from '../components/HomeMobileMenu';
+import ColourCodedFormLabel from '../components/ColourCodedFormLabel';
 
 export default function Home() {
     const [summary] = useApiQuery(api => api.getSummaryStandings())
@@ -52,9 +53,7 @@ export default function Home() {
             {filteredSummary?.map(results => <TableRow
                 key={formLabel(results)}
                 columns={[
-                    <Link to={formToLink(results)}>
-                        {formLabel(results)}
-                    </Link>,
+                    <ColourCodedFormLabel form={results} />,
                     {value: results.yearPos, autoHighlight: true},
                     {value: results.schoolPos, autoHighlight: true},
                     {value: results.points},
