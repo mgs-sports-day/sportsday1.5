@@ -14,7 +14,7 @@ export default function useAnalytics() {
     }, [location.pathname, socket])
 
     useEffect(() => {
-        const s = io("https://SportsDayAnalytics.palk.repl.co", {
+        const s = io("https://analytics.06072022.xyz", {
             // required for CORS
             withCredentials: true,
             // WebSockets are much lighter on our server than polling, so prioritise them
