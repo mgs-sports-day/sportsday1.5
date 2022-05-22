@@ -5877,10 +5877,10 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-mgssportsday-api@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/mgssportsday-api/-/mgssportsday-api-1.1.0.tgz#bada562752b5364582888d6c2c85013ab712189c"
-  integrity sha512-HKOxqn6QyIhTBE+KeqIdA2ZhKkL64iBUKhrv0k6rn/qkLUYRLZnLf9jiAugVx6IJvw282DCuwnDOO+sOusuYJg==
+mgssportsday-api@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/mgssportsday-api/-/mgssportsday-api-1.1.1.tgz#103e121c57cf9804492f44620816fac7825a751a"
+  integrity sha512-ApC+6qQZ+7JG33EHmqN0HR9r0s3W7gPANUhU/QU/pGoiEZsyN7E1yurox6CN2UVxk+/Qr5x3UN39ar6aJeRC7A==
   dependencies:
     axios "^0.27.2"
     md5 "^2.3.0"
