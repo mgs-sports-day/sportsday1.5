@@ -45,9 +45,9 @@ export default function Home() {
         <Table
             header={[
                 { text: 'Form' },
-                { text: 'Year rank' },
-                { text: 'School rank' },
-                { text: 'Total points' },
+                { text: 'Year rank', sortable: true },
+                { text: 'School rank', sortable: true },
+                { text: 'Total points', sortable: true },
             ]}
         >
             {filteredSummary?.map(results => <TableRow

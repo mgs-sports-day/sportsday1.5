@@ -42,15 +42,15 @@ export default function FormOverview() {
 
         {allStandings !== undefined && <Table>
             <TableRow columns={[
-                {value: 'Total points'},
+                {value: 'Total points', isHeader: true},
                 {value: thisFormStanding?.points}
             ]} />
             <TableRow columns={[
-                {value: 'School position'},
+                {value: 'School position', isHeader: true},
                 {value: thisFormStanding?.schoolPos, autoHighlight: true}
             ]} />
             <TableRow columns={[
-                {value: 'Year position'},
+                {value: 'Year position', isHeader: true},
                 {value: thisFormStanding?.yearPos, autoHighlight: true}
             ]} />
         </Table>}
@@ -62,15 +62,15 @@ export default function FormOverview() {
                 { text: 'Competitor B', colSpan: 2 },
                 { text: 'Competitor C', colSpan: 2 },
                 { text: 'Record bonus', rowSpan: 2 },
-                { text: 'Total points', rowSpan: 2 },
+                { text: 'Total points', rowSpan: 2, sortable: true },
             ]}
             secondaryHeader={[
-                { text: 'Position' },
-                { text: 'Points' },
-                { text: 'Position' },
-                { text: 'Points' },
-                { text: 'Position' },
-                { text: 'Points' },
+                { text: 'Position', sortable: true },
+                { text: 'Points', sortable: true },
+                { text: 'Position', sortable: true },
+                { text: 'Points', sortable: true },
+                { text: 'Position', sortable: true },
+                { text: 'Points', sortable: true },
             ]}
         >
             {formResults.map(result => <TableRow
