@@ -112,26 +112,28 @@ export function Table(
                     [children]
         ) as ReactElement<TableRowProps>[] | undefined;
 
-        if (sortField === null) {
+        if (sortField === null || !childList) {
             return childList;
         } else {
-            return childList?.sort((a, b) => {
-                const fields = [a.props.columns[sortField], b.props.columns[sortField]] as any[];
-                const isBad = [
-                    isReactElement(fields[0]) || typeof fields[0].value !== 'number',
-                    isReactElement(fields[1]) || typeof fields[1].value !== 'number',
-                ];
+            return Object
+                .assign([] as typeof childList, childList)
+                .sort((a, b) => {
+                    const fields = [a.props.columns[sortField], b.props.columns[sortField]] as any[];
+                    const isBad = [
+                        isReactElement(fields[0]) || typeof fields[0].value !== 'number',
+                        isReactElement(fields[1]) || typeof fields[1].value !== 'number',
+                    ];
 
-                if (isBad[0] || isBad[1]) {
-                    return Number(isBad[0]) - Number(isBad[1]);
-                }
+                    if (isBad[0] || isBad[1]) {
+                        return Number(isBad[0]) - Number(isBad[1]);
+                    }
 
-                if (sortDirection === SortDirection.Desc) {
-                    return fields[1].value - fields[0].value;
-                }
+                    if (sortDirection === SortDirection.Desc) {
+                        return fields[1].value - fields[0].value;
+                    }
 
-                return fields[0].value - fields[1].value;
-            });
+                    return fields[0].value - fields[1].value;
+                });
         }
     }, [children, sortField, sortDirection]);
 
