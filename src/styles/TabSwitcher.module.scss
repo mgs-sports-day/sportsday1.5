@@ -1,0 +1,33 @@
+@import 'variables';
+
+.container {
+  width: 100%;
+
+  .tabSelect {
+    width: 100%;
+    display: flex;
+    border: 1px $primary-color solid;
+    border-radius: 10px;
+    overflow: hidden;
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: $primary-color-surface;
+      color: $primary-color-surface-text;
+      border: 1px none transparentize($primary-color-accent, 0.4);
+      border-right-style: solid;
+      cursor: pointer;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &.active {
+        font-weight: bold;
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
+}

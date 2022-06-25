@@ -47,7 +47,7 @@ export default function Home() {
                 { text: 'Form' },
                 { text: 'Year rank', sortable: true },
                 { text: 'School rank', sortable: true },
-                { text: 'Total points', sortable: true },
+                { text: 'Total points' },
             ]}
         >
             {filteredSummary?.map(results => <TableRow
