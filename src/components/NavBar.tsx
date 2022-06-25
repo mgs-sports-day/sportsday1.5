@@ -39,9 +39,9 @@ export default function NavBar() {
             </Link>
         </h1>
 
-        <ul className={styles.desktopMenuItems}>
+        <menu role="menu" className={styles.desktopMenuItems}>
             {menuItemList}
-        </ul>
+        </menu>
 
         <button
             className={styles.mobileMenuLink}
@@ -54,9 +54,9 @@ export default function NavBar() {
         </button>
 
         <div className={`${styles.mobileMenu} ${showMobileMenu ? styles.show : ''}`}>
-            <ul>
+            <menu role="menu">
                 {menuItemList}
-            </ul>
+            </menu>
         </div>
 
         <div
@@ -64,7 +64,7 @@ export default function NavBar() {
             role='progressbar'
             aria-valuemax={refreshInterval / 1000}
             aria-valuenow={roundedTime}
-            aria-valuetext={'Refreshing in ' + (20 - roundedTime) + 's'}
+            aria-valuetext={'Refreshing in ' + ((refreshInterval/1000) - roundedTime) + 's'}
         >
             <div
                 className={styles.progressBar}
