@@ -14,6 +14,7 @@ const EventOverview = lazy(() => import('./pages/Event/EventOverview'))
 const FormsList = lazy(() => import('./pages/Form/FormsList'))
 const FormOverview = lazy(() => import('./pages/Form/FormOverview'))
 const RecordsOverview = lazy(() => import('./pages/RecordsOverview'))
+const Info = lazy(() => import('./pages/Info'))
 
 const SuspenseRoute = ({component: Component}: {component: LazyExoticComponent<() => JSX.Element>}) => <Suspense fallback={<></>}>
     <Component />
@@ -40,6 +41,8 @@ root.render(
                         <Route path="forms/:formId" element={<SuspenseRoute component={FormOverview} />} />
 
                         <Route path="records" element={<SuspenseRoute component={RecordsOverview} />} />
+
+                        <Route path="info" element={<SuspenseRoute component={Info} />} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />

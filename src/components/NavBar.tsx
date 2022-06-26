@@ -10,6 +10,7 @@ export const MenuItems: [string, string][] = [
     ["Events", "/events"],
     ["Forms", "/forms"],
     ["Records", "/records"],
+    ["Information", "/info"],
     ["About", "/about"],
 ]
 
