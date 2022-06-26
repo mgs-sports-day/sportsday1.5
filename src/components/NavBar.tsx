@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Ticker } from '../api/ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
+import MGSIcon from '../assets/mgs.svg';
 
 export const MenuItems: [string, string][] = [
     ["Home", "/"],
@@ -36,7 +37,8 @@ export default function NavBar() {
     return <nav className={styles.nav}>
         <h1 className={styles.title}>
             <Link to="/">
-                MGS Sports Day
+                <img src={MGSIcon} className={styles.logo} />
+                Sports Day
             </Link>
         </h1>
 

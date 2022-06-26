@@ -24,19 +24,30 @@
   .title {
     color: white;
     font-size: 2rem;
-
-    @media (max-width: 420px) {
-      font-size: 1.5rem;
-    }
-
     @media (max-width: 300px) {
       font-size: 1rem;
+    }
+
+    @media (max-width: 850px) {
+      font-size: 1.5rem;
     }
 
     a {
       color: white;
       text-decoration: none;
+      vertical-align: middle;
       @include navbar-accessibility-shadow;
+    }
+
+    .logo {
+      height: $navbar-height - 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 1rem;
+
+      @media (max-width: 950px) {
+        display: none;
+      }
     }
   }
 
