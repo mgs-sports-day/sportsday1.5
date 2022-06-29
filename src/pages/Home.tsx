@@ -39,6 +39,10 @@ export default function Home() {
         </p>
 
         <p>
+            For the map and timetable, please see <Link to="/info">Information</Link>.
+        </p>
+
+        <p>
             Forms with 0 points are not ranked.
         </p>
 
