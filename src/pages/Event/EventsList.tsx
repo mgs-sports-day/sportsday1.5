@@ -1,3 +1,4 @@
+import { useWindowSize } from 'usehooks-ts';
 import { Table, TableRow } from '../../components/Table';
 import { SportEventName } from 'mgssportsday-api/dist/types';
 import { eventIdToName } from '../../api/helpers';
@@ -8,6 +9,7 @@ import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import Breadcrumb from '../../components/Breadcrumb';
 
 export default function EventsList() {
+    const {width} = useWindowSize();
     const navigate = useNavigate()
 
     return <>
@@ -24,8 +26,8 @@ export default function EventsList() {
 
         <Table
             header={[
-                { text: 'Event name', width: '80%' },
-                { text: 'View', width: '20%' },
+                { text: 'Event name', width: width > 900 ? '80%' : '50%' },
+                { text: 'View', width: width > 900 ? '20%' : '50%' },
             ]}
         >
             {Object.values(SportEventName).map(eventId => <TableRow key={eventId} columns={[
