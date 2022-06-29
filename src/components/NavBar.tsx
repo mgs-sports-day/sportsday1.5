@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { Ticker } from '../api/ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
+import MGSIcon from '../assets/mgs.svg';
 
 export const MenuItems: [string, string][] = [
     ["Home", "/"],
     ["Events", "/events"],
     ["Forms", "/forms"],
     ["Records", "/records"],
+    ["Information", "/info"],
     ["About", "/about"],
 ]
 
@@ -35,13 +37,14 @@ export default function NavBar() {
     return <nav className={styles.nav}>
         <h1 className={styles.title}>
             <Link to="/">
-                MGS Sports Day
+                <img src={MGSIcon} className={styles.logo} />
+                Sports Day
             </Link>
         </h1>
 
-        <ul className={styles.desktopMenuItems}>
+        <menu role="menu" className={styles.desktopMenuItems}>
             {menuItemList}
-        </ul>
+        </menu>
 
         <button
             className={styles.mobileMenuLink}
@@ -54,9 +57,9 @@ export default function NavBar() {
         </button>
 
         <div className={`${styles.mobileMenu} ${showMobileMenu ? styles.show : ''}`}>
-            <ul>
+            <menu role="menu">
                 {menuItemList}
-            </ul>
+            </menu>
         </div>
 
         <div
@@ -64,7 +67,7 @@ export default function NavBar() {
             role='progressbar'
             aria-valuemax={refreshInterval / 1000}
             aria-valuenow={roundedTime}
-            aria-valuetext={'Refreshing in ' + (20 - roundedTime) + 's'}
+            aria-valuetext={'Refreshing in ' + ((refreshInterval/1000) - roundedTime) + 's'}
         >
             <div
                 className={styles.progressBar}

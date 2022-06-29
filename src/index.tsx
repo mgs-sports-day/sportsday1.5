@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import ApiContext from './api/context';
 import App from './App';
 import GSheetsAPI from 'mgssportsday-api';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './styles/general.scss';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -14,6 +14,7 @@ const EventOverview = lazy(() => import('./pages/Event/EventOverview'))
 const FormsList = lazy(() => import('./pages/Form/FormsList'))
 const FormOverview = lazy(() => import('./pages/Form/FormOverview'))
 const RecordsOverview = lazy(() => import('./pages/RecordsOverview'))
+const Info = lazy(() => import('./pages/Info'))
 
 const SuspenseRoute = ({component: Component}: {component: LazyExoticComponent<() => JSX.Element>}) => <Suspense fallback={<></>}>
     <Component />
@@ -27,7 +28,7 @@ const ApiInstance = new GSheetsAPI('AIzaSyCFfbIjKZGPkuXnYUFD4E14flZNKMC9rQE', '1
 root.render(
     <React.StrictMode>
         <ApiContext.Provider value={ApiInstance}>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<Home />} />
@@ -40,11 +41,13 @@ root.render(
                         <Route path="forms/:formId" element={<SuspenseRoute component={FormOverview} />} />
 
                         <Route path="records" element={<SuspenseRoute component={RecordsOverview} />} />
+
+                        <Route path="info" element={<SuspenseRoute component={Info} />} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </ApiContext.Provider>
     </React.StrictMode>
 );
