@@ -6,7 +6,7 @@ import ColourCodedFormLabel from '../../components/ColourCodedFormLabel';
 import { Table, TableRow } from '../../components/Table';
 import TabSwitcher, { Tab } from '../../components/TabSwitcher';
 
-const yearGroups: YearGroup[] = [7, 8, 9, 10];
+export const yearGroups: YearGroup[] = [7, 8, 9, 10];
 
 export default function FormsList() {
     const [allStandings] = useApiQuery(api => api.getSummaryStandings());

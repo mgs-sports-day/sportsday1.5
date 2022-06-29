@@ -112,6 +112,8 @@ export function Table(
                     [children]
         ) as ReactElement<TableRowProps>[] | undefined;
 
+        const getSortValue = (value: TextRowValue) => value.sortValue ?? Number(value.value);
+
         if (sortField === null || !childList) {
             return childList;
         } else {
@@ -129,10 +131,10 @@ export function Table(
                     }
 
                     if (sortDirection === SortDirection.Desc) {
-                        return fields[1].value - fields[0].value;
+                        return getSortValue(fields[1]) - getSortValue(fields[0]);
                     }
 
-                    return fields[0].value - fields[1].value;
+                    return getSortValue(fields[0]) - getSortValue(fields[1]);
                 });
         }
     }, [children, sortField, sortDirection]);
@@ -197,6 +199,7 @@ export interface TextRowValue {
     value?: string | number,
     autoHighlight?: boolean,
     isHeader?: boolean,
+    sortValue?: number,
 }
 
 export type RowValue = TextRowValue | ReactElement
