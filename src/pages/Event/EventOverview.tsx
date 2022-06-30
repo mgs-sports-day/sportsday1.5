@@ -54,7 +54,6 @@ export default function EventOverview() {
                                 { text: 'Competitor B', colSpan: 2 },
                                 { text: 'Competitor C', colSpan: 2 },
                                 { text: 'Total points (with bonus)', rowSpan: 2, width: '10%', sortable: true },
-                                { text: 'Overall position', rowSpan: 2, sortable: true, width: '12%' },
                             ]}
                             secondaryHeader={[
                                 { text: 'Position', sortable: true },
@@ -87,7 +86,6 @@ export default function EventOverview() {
                                         { value: getFormRes(yearId, form, 'c')?.pos, autoHighlight: true },
                                         { value: getFormRes(yearId, form, 'c')?.pts },
                                         { value: getFormRes(yearId, form, 'total')?.pts },
-                                        { value: getFormRes(yearId, form, 'total')?.pos, autoHighlight: true },
                                     ]}
                                 />)}
                         </Table>
