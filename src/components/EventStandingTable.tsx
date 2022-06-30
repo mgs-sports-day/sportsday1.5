@@ -27,8 +27,8 @@ export default function EventStandingTable(
                 { text: 'Competitor A', colSpan: 2 },
                 { text: 'Competitor B', colSpan: 2 },
                 { text: 'Competitor C', colSpan: 2 },
-                { text: 'Total points (with bonus)', rowSpan: 2, width: '10%', sortable: true },
-                { text: 'Overall position', rowSpan: 2, sortable: true, width: '12%' },
+                { text: 'Record bonus', rowSpan: 2, width: '10%' },
+                { text: 'Total points', rowSpan: 2, width: '15%', sortable: true },
             ]}
             secondaryHeader={[
                 { text: 'Position', sortable: true },
@@ -61,8 +61,8 @@ export default function EventStandingTable(
                                 { value: getFormRes(form, 'b')?.pts },
                                 { value: getFormRes(form, 'c')?.pos, autoHighlight: true },
                                 { value: getFormRes(form, 'c')?.pts },
+                                { value: getFormRes(form, 'rb')?.pts },
                                 { value: getFormRes(form, 'total')?.pts },
-                                { value: getFormRes(form, 'total')?.pos, autoHighlight: true },
                             ]}
                         />
                     ),
