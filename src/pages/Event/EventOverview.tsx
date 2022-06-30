@@ -4,6 +4,7 @@ import { useApiQuery } from '../../api/context';
 import { eventIdToName } from '../../api/helpers';
 import Breadcrumb from '../../components/Breadcrumb';
 import ColourCodedFormLabel from '../../components/ColourCodedFormLabel';
+import EventStandingTable from '../../components/EventStandingTable';
 import { Table, TableRow } from '../../components/Table';
 import TabSwitcher, { Tab } from '../../components/TabSwitcher';
 import { yearGroups } from '../Form/FormsList';
@@ -42,55 +43,12 @@ export default function EventOverview() {
 
         <TabSwitcher>
             {
-                yearGroups.map((year, yearId) => (
+                yearGroups.map((year) => (
                     <Tab
                         label={`Year ${year}`}
                         key={year}
                     >
-                        <Table
-                            header={[
-                                { text: 'Form', rowSpan: 2 },
-                                { text: 'Competitor A', colSpan: 2 },
-                                { text: 'Competitor B', colSpan: 2 },
-                                { text: 'Competitor C', colSpan: 2 },
-                                { text: 'Total points (with bonus)', rowSpan: 2, width: '10%', sortable: true },
-                                { text: 'Overall position', rowSpan: 2, sortable: true, width: '12%' },
-                            ]}
-                            secondaryHeader={[
-                                { text: 'Position', sortable: true },
-                                { text: 'Points', sortable: true },
-                                { text: 'Position', sortable: true },
-                                { text: 'Points', sortable: true },
-                                { text: 'Position', sortable: true },
-                                { text: 'Points', sortable: true },
-                            ]}
-                        >
-                            {getFormsInYear(year)
-                                ?.sort((a, b) => (
-                                    getFormRes(yearId, b, 'total')?.pts || 0
-                                ) - (
-                                    getFormRes(yearId, a, 'total')?.pts || 0
-                                ))
-                                .map(form => <TableRow
-                                    key={form}
-                                    columns={[
-                                        <ColourCodedFormLabel
-                                            form={{
-                                                year,
-                                                form,
-                                            }}
-                                        />,
-                                        { value: getFormRes(yearId, form, 'a')?.pos, autoHighlight: true },
-                                        { value: getFormRes(yearId, form, 'a')?.pts },
-                                        { value: getFormRes(yearId, form, 'b')?.pos, autoHighlight: true },
-                                        { value: getFormRes(yearId, form, 'b')?.pts },
-                                        { value: getFormRes(yearId, form, 'c')?.pos, autoHighlight: true },
-                                        { value: getFormRes(yearId, form, 'c')?.pts },
-                                        { value: getFormRes(yearId, form, 'total')?.pts },
-                                        { value: getFormRes(yearId, form, 'total')?.pos, autoHighlight: true },
-                                    ]}
-                                />)}
-                        </Table>
+                        <EventStandingTable event={event} year={year} />
                     </Tab>
                 ))
             }
