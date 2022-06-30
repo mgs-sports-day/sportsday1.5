@@ -13,6 +13,7 @@ export default function EventOverview() {
     const event = eventId! as SportEventName;
     const prettyEventName = eventIdToName(event);
 
+    // TODO: split this up into a per-year group component that only makes requests when the relevant tab is selected
     const eventStandings = [
         useApiQuery(api => api.getEventResults(event, 7))[0],
         useApiQuery(api => api.getEventResults(event, 8))[0],

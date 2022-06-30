@@ -8,6 +8,7 @@ import TabSwitcher, { Tab } from '../components/TabSwitcher';
 import { yearGroups } from './Form/FormsList';
 
 export default function RecordsOverview() {
+    // TODO: split this up into a per-year group component that only makes requests when the relevant tab is selected
     const yearGroupRecords = [
         useApiQuery(api => api.getYearGroupRecords(7))[0],
         useApiQuery(api => api.getYearGroupRecords(8))[0],
@@ -15,6 +16,7 @@ export default function RecordsOverview() {
         useApiQuery(api => api.getYearGroupRecords(10))[0],
     ];
 
+    // TODO: memoise
     const getBestRecord = (
         yearGroups: (EventRecordStanding[] | undefined)[],
         event: EventRecordStanding,
@@ -28,6 +30,8 @@ export default function RecordsOverview() {
         ])
         .filter(e => e[2])
         .sort((a, b) => b[2] && a[2] ? event.units === 'second' ? a[2] - b[2] : b[2] - a[2] : 1000)[0];
+
+    // TODO: memoise
     const records = [
         ...yearGroupRecords,
         yearGroupRecords[0]?.map((event): EventRecordStanding => {
