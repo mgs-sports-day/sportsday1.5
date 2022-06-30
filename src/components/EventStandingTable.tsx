@@ -16,6 +16,7 @@ export default function EventStandingTable(
     const standings = useApiQuery(api => api.getEventResults(event, year))[0] as EventResults | undefined;
 
     const forms = standings?.total.map(e => e.letter);
+    // TODO: memoise
     const getFormRes = (form: string, group: keyof EventResults) => {
         return standings && standings[group].filter(e => e.letter === form)[0];
     };
@@ -39,6 +40,7 @@ export default function EventStandingTable(
                 { text: 'Points', sortable: true },
             ]}
         >
+            {/*TODO: memoise*/}
             {forms
                 ?.sort((a, b) => (
                     getFormRes(b, 'total')?.pts || 0
