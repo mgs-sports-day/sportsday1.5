@@ -1,41 +1,46 @@
-import {ReactElement, useState} from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import tabSwitcher from '../styles/TabSwitcher.module.scss';
 
-interface TabProps {
-    label: string | number;
-    dataKey?: string | number;
+type TabProps<T extends string | number> = {
+    label: T;
+    dataKey?: T | string | number;
     children?: ReactElement | ReactElement[];
 }
 
-export function Tab(
+export function Tab<T extends string | number>(
     {
-        label,
-        dataKey,
         children,
-    }: TabProps,
+    }: TabProps<T>,
 ): ReactElement {
     return <>{children}</>;
 }
 
-export default function TabSwitcher(
+export default function TabSwitcher<T extends number | string>(
     {
         children,
         initialValue,
+        onChange,
     }: {
-        children?: ReactElement<TabProps> | ReactElement<TabProps>[];
-        initialValue?: string;
+        children?: ReactElement<TabProps<T>> | ReactElement<TabProps<T>>[];
+        initialValue?: T;
+        onChange?: (value: T | string | number) => void;
     },
 ) {
-    const getKey = (year: ReactElement<TabProps>) => year.props.dataKey || year.props.label;
+    const getKey = (year: ReactElement<TabProps<T>>) => year.props.dataKey ?? year.props.label as T;
 
     const childrenList = children && (
         children.hasOwnProperty('length') ?
-            children as ReactElement<TabProps>[] :
-            [children as ReactElement<TabProps>]
+            children as ReactElement<TabProps<T>>[] :
+            [children as ReactElement<TabProps<T>>]
     );
     const [currentValue, setCurrentValue] = useState(
-        childrenList ? (initialValue || getKey(childrenList[0])) : null,
+        childrenList ? (initialValue ?? getKey(childrenList[0])) : null,
     );
+
+    const setTab = useCallback((value: T | string | number) => {
+        onChange && onChange(value);
+        setCurrentValue(value);
+    }, [onChange]);
 
     return (
         <div className={tabSwitcher.container}>
@@ -44,7 +49,7 @@ export default function TabSwitcher(
                     childrenList?.map(child => (
                         <button
                             className={currentValue === getKey(child) ? tabSwitcher.active : undefined}
-                            onClick={() => setCurrentValue(getKey(child))}
+                            onClick={() => setTab(getKey(child))}
                             key={getKey(child)}
                         >
                             {child.props.label}

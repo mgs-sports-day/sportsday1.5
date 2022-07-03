@@ -1,7 +1,6 @@
-import { EventResults, SportEventName, YearGroup } from 'mgssportsday-api/dist/types';
+import { SportEventName, YearGroup } from 'mgssportsday-api/dist/types';
 import { useParams } from 'react-router-dom';
-import { useApiQuery } from '../../api/context';
-import { eventIdToName } from '../../api/helpers';
+import { eventIdToName, useDefaultTab } from '../../api/helpers';
 import Breadcrumb from '../../components/Breadcrumb';
 import EventStandingTable from '../../components/EventStandingTable';
 import TabSwitcher, { Tab } from '../../components/TabSwitcher';
@@ -11,6 +10,8 @@ export default function EventOverview() {
     const { eventId } = useParams();
     const event = eventId! as SportEventName;
     const prettyEventName = eventIdToName(event);
+
+    const [defaultTab, setDefaultTab] = useDefaultTab();
 
     return <>
         <Breadcrumb
@@ -25,11 +26,15 @@ export default function EventOverview() {
             {prettyEventName}
         </h1>
 
-        <TabSwitcher>
+        <TabSwitcher
+            initialValue={defaultTab}
+            onChange={setDefaultTab as (newValue: any) => void}
+        >
             {
                 yearGroups.map((year) => (
                     <Tab
                         label={`Year ${year}`}
+                        dataKey={year}
                         key={year}
                     >
                         <EventStandingTable

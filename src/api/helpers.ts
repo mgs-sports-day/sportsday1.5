@@ -1,9 +1,29 @@
 import type { Form, YearGroup } from 'mgssportsday-api/dist/types';
 import { SportEventName, Unit } from 'mgssportsday-api/dist/types';
+import { useMemo } from 'react';
 
 export const formLabel = (formLike: Form) => {
     return `${formLike.year}${formLike.form}`;
 };
+
+export const useDefaultTab = (): [YearGroup | undefined, (newValue: YearGroup) => void] => {
+    const tab = useMemo(() => {
+        const storageRes = localStorage.getItem('default_year_group');
+        if (storageRes && Number(storageRes)) {
+            return parseInt(storageRes, 10) as YearGroup;
+        }
+
+        return;
+    }, []);
+
+    const update = (newValue: YearGroup) => {
+        if (isNaN(newValue)) return;
+
+        localStorage.setItem('default_year_group', newValue.toString(10))
+    }
+
+    return [tab, update];
+}
 
 export const formToLink = (formLike: Form | string) => {
     if (typeof formLike === 'string') {

@@ -1,6 +1,6 @@
 import { YearGroup } from 'mgssportsday-api/dist/types';
 import { useApiQuery } from '../../api/context';
-import { formLabel } from '../../api/helpers';
+import { formLabel, useDefaultTab } from '../../api/helpers';
 import Breadcrumb from '../../components/Breadcrumb';
 import ColourCodedFormLabel from '../../components/ColourCodedFormLabel';
 import { Table, TableRow } from '../../components/Table';
@@ -10,6 +10,7 @@ export const yearGroups: YearGroup[] = [7, 8, 9, 10];
 
 export default function FormsList() {
     const [allStandings] = useApiQuery(api => api.getSummaryStandings());
+    const [defaultTab, setDefaultTab] = useDefaultTab();
 
     return <>
         <Breadcrumb
@@ -21,12 +22,16 @@ export default function FormsList() {
 
         <h1>All forms</h1>
 
-        <TabSwitcher>
+        <TabSwitcher
+            initialValue={defaultTab}
+            onChange={setDefaultTab as (newValue: any) => void}
+        >
             {
                 yearGroups.map(year => (
                     <Tab
                         label={`Year ${year}`}
                         key={year}
+                        dataKey={year}
                     >
                         {
                             allStandings && (

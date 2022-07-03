@@ -1,5 +1,6 @@
 import { EventRecordStanding, YearGroup } from 'mgssportsday-api/dist/types';
 import { useApiQuery } from '../api/context';
+import { useDefaultTab } from '../api/helpers';
 import Breadcrumb from '../components/Breadcrumb';
 import RecordTable from '../components/RecordTable';
 import TabSwitcher, { Tab } from '../components/TabSwitcher';
@@ -63,6 +64,8 @@ function AllRecordTable() {
 }
 
 export default function RecordsOverview() {
+    const [defaultTab, setDefaultTab] = useDefaultTab();
+
     return <>
         <Breadcrumb
             paths={[
@@ -73,7 +76,10 @@ export default function RecordsOverview() {
 
         <h1>Records</h1>
 
-        <TabSwitcher>
+        <TabSwitcher
+            initialValue={defaultTab}
+            onChange={setDefaultTab as (newValue: any) => void}
+        >
             {
                 [
                     ...yearGroups,
@@ -82,6 +88,7 @@ export default function RecordsOverview() {
                     <Tab
                         label={year === 'All' ? year : `Year ${year}`}
                         key={year}
+                        dataKey={year}
                     >
                         {
                             year === 'All' ? (
