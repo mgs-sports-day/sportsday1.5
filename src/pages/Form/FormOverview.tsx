@@ -1,28 +1,30 @@
-import { Link, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
-import { eventIdToName, linkToForm } from '../../api/helpers';
+import { faExternalLink } from '@fortawesome/free-solid-svg-icons/faExternalLink';
 import type { Form } from 'mgssportsday-api/dist/types';
+import { useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useApiQuery } from '../../api/context';
-import { Table, TableRow } from '../../components/Table';
+import { eventIdToName, linkToForm } from '../../api/helpers';
 import Breadcrumb from '../../components/Breadcrumb';
+import LinkFAIcon from '../../components/LinkFAIcon';
+import { Table, TableRow } from '../../components/Table';
 
 export default function FormOverview() {
-    const { formId } = useParams()
+    const { formId } = useParams();
     const form = useMemo<Form>(() => {
         if (formId) {
-            return linkToForm(formId)
+            return linkToForm(formId);
         } else {
-            throw new Error("No form ID provided!")
+            throw new Error('No form ID provided!');
         }
-    }, [formId])
+    }, [formId]);
 
-    const [formResults] = useApiQuery(api => api.getFormResults(form.year, form.form))
-    const [allStandings] = useApiQuery(api => api.getSummaryStandings())
+    const [formResults] = useApiQuery(api => api.getFormResults(form.year, form.form));
+    const [allStandings] = useApiQuery(api => api.getSummaryStandings());
 
     const thisFormStanding = useMemo(() => {
-        if (!allStandings) return undefined
-        return allStandings.find(e => e.year === form.year && e.form === form.form)
-    }, [allStandings, form])
+        if (!allStandings) return undefined;
+        return allStandings.find(e => e.year === form.year && e.form === form.form);
+    }, [allStandings, form]);
 
     return <>
         <Breadcrumb
@@ -41,18 +43,24 @@ export default function FormOverview() {
         </h1>
 
         {allStandings !== undefined && <Table>
-            <TableRow columns={[
-                {value: 'Total points', isHeader: true},
-                {value: thisFormStanding?.points}
-            ]} />
-            <TableRow columns={[
-                {value: 'School position', isHeader: true},
-                {value: thisFormStanding?.schoolPos, autoHighlight: true}
-            ]} />
-            <TableRow columns={[
-                {value: 'Year position', isHeader: true},
-                {value: thisFormStanding?.yearPos, autoHighlight: true}
-            ]} />
+            <TableRow
+                columns={[
+                    { value: 'Total points', isHeader: true },
+                    { value: thisFormStanding?.points },
+                ]}
+            />
+            <TableRow
+                columns={[
+                    { value: 'School position', isHeader: true },
+                    { value: thisFormStanding?.schoolPos, autoHighlight: true },
+                ]}
+            />
+            <TableRow
+                columns={[
+                    { value: 'Year position', isHeader: true },
+                    { value: thisFormStanding?.yearPos, autoHighlight: true },
+                ]}
+            />
         </Table>}
 
         {formResults !== undefined && <Table
@@ -78,6 +86,7 @@ export default function FormOverview() {
                 columns={[
                     <Link to={`/events/${result.eventDb}`}>
                         {eventIdToName(result.eventDb)}
+                        <LinkFAIcon icon={faExternalLink} />
                     </Link>,
                     { value: result.posA, autoHighlight: true },
                     { value: result.ptsA },
@@ -90,5 +99,5 @@ export default function FormOverview() {
                 ]}
             />)}
         </Table>}
-    </>
+    </>;
 }

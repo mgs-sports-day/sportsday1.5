@@ -39,12 +39,16 @@ export default function Info() {
         />
 
         <h2>Map</h2>
-        <Button onClick={() => download('map.pdf')}>
-            <FontAwesomeIcon icon={faDownload} /> Download PDF
+        <Button onClick={() => download('map.jpg')}>
+            <FontAwesomeIcon icon={faDownload} /> Download map
         </Button>
-        <iframe
-            src={require("../assets/map.pdf")}
+        <img
+            src={require("../assets/map.jpg")}
+            alt='Map of athletics track and surrounding tents'
             className={styles.pdfFrame}
+            style={{
+                height: 'auto'
+            }}
         />
     </>
 }
