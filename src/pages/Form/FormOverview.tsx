@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useApiQuery } from '../../api/context';
 import { eventIdToName, linkToForm } from '../../api/helpers';
 import Breadcrumb from '../../components/Breadcrumb';
+import EventDataTable from '../../components/EventDataTable';
 import LinkFAIcon from '../../components/LinkFAIcon';
 import { Table, TableRow } from '../../components/Table';
 
@@ -63,41 +64,26 @@ export default function FormOverview() {
             />
         </Table>}
 
-        {formResults !== undefined && <Table
-            header={[
-                { text: 'Event', rowSpan: 2 },
-                { text: 'Competitor A', colSpan: 2 },
-                { text: 'Competitor B', colSpan: 2 },
-                { text: 'Competitor C', colSpan: 2 },
-                { text: 'Record bonus', rowSpan: 2 },
-                { text: 'Total points', rowSpan: 2, sortable: true },
-            ]}
-            secondaryHeader={[
-                { text: 'Position', sortable: true },
-                { text: 'Points', sortable: true },
-                { text: 'Position', sortable: true },
-                { text: 'Points', sortable: true },
-                { text: 'Position', sortable: true },
-                { text: 'Points', sortable: true },
-            ]}
-        >
-            {formResults.map(result => <TableRow
-                key={result.eventDb}
-                columns={[
-                    <Link to={`/events/${result.eventDb}`}>
-                        {eventIdToName(result.eventDb)}
-                        <LinkFAIcon icon={faExternalLink} />
-                    </Link>,
-                    { value: result.posA, autoHighlight: true },
-                    { value: result.ptsA },
-                    { value: result.posB, autoHighlight: true },
-                    { value: result.ptsB },
-                    { value: result.posC, autoHighlight: true },
-                    { value: result.ptsC },
-                    { value: result.ptsRB },
-                    { value: result.ptsTOTAL },
-                ]}
-            />)}
-        </Table>}
+        {formResults !== undefined && (
+            <EventDataTable
+                firstRowHeading='Event'
+                rows={
+                    formResults.map(result => [
+                        <Link to={`/events/${result.eventDb}`}>
+                            {eventIdToName(result.eventDb)}
+                            <LinkFAIcon icon={faExternalLink} />
+                        </Link>,
+                        { value: result.posA, autoHighlight: true },
+                        { value: result.ptsA },
+                        { value: result.posB, autoHighlight: true },
+                        { value: result.ptsB },
+                        { value: result.posC, autoHighlight: true },
+                        { value: result.ptsC },
+                        { value: result.ptsRB },
+                        { value: result.ptsTOTAL },
+                    ])
+                }
+            />
+        )}
     </>;
 }
