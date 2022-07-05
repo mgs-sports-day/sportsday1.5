@@ -1,8 +1,9 @@
 import { EventRecordStanding, YearGroup } from 'mgssportsday-api/dist/types';
 import { useApiQuery } from '../api/context';
-import { useDefaultTab } from '../api/helpers';
+import { getRankWhere, useDefaultTab } from '../api/helpers';
 import Breadcrumb from '../components/Breadcrumb';
 import RecordTable from '../components/RecordTable';
+import { Table, TableRow } from '../components/Table';
 import TabSwitcher, { Tab } from '../components/TabSwitcher';
 import { yearGroups } from './Form/FormsList';
 
@@ -65,6 +66,7 @@ function AllRecordTable() {
 
 export default function RecordsOverview() {
     const [defaultTab, setDefaultTab] = useDefaultTab();
+    const [recordSummary] = useApiQuery(api => api.getRecordsSummaryStats());
 
     return <>
         <Breadcrumb
@@ -101,5 +103,47 @@ export default function RecordsOverview() {
                 ))
             }
         </TabSwitcher>
+
+        {
+            recordSummary !== undefined &&
+            <Table>
+                {
+                    recordSummary && recordSummary.map(yearGroup => (
+                        <TableRow
+                            key={yearGroup.year}
+                            columns={[
+                                { value: yearGroup.year, isHeader: true },
+                                {
+                                    value: `${yearGroup.recordsBroken} broken`,
+                                    autoHighlight: yearGroup.year !== 'All year groups',
+                                    isHeader: yearGroup.year === 'All year groups',
+                                    ...(yearGroup.year === 'All year groups' ? {} : {
+                                        highlightValue: getRankWhere(
+                                            recordSummary.filter(e => e.year !== 'All year groups'),
+                                            'year',
+                                            yearGroup.year,
+                                            'recordsBroken',
+                                        ),
+                                    }),
+                                },
+                                {
+                                    value: `${yearGroup.recordsEqualled} equalled`,
+                                    autoHighlight: yearGroup.year !== 'All year groups',
+                                    isHeader: yearGroup.year === 'All year groups',
+                                    ...(yearGroup.year === 'All year groups' ? {} : {
+                                        highlightValue: getRankWhere(
+                                            recordSummary.filter(e => e.year !== 'All year groups'),
+                                            'year',
+                                            yearGroup.year,
+                                            'recordsEqualled',
+                                        ),
+                                    }),
+                                },
+                            ]}
+                        />
+                    ))
+                }
+            </Table>
+        }
     </>;
 }

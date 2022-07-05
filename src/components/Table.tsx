@@ -200,6 +200,7 @@ export interface TextRowValue {
     autoHighlight?: boolean,
     isHeader?: boolean,
     sortValue?: number,
+    highlightValue?: number,
 }
 
 export type RowValue = TextRowValue | ReactElement
@@ -212,7 +213,9 @@ const getRankingClassName = (value: RowValue): string => {
         return '';
     }
 
-    if (!value.autoHighlight || typeof value.value !== 'number') {
+    const number = value.value && typeof value.value === 'number' ? value.value : value.highlightValue
+
+    if (!value.autoHighlight || typeof number !== 'number') {
         if (value.isHeader) {
             return styles.header;
         }
@@ -220,9 +223,9 @@ const getRankingClassName = (value: RowValue): string => {
         return '';
     }
 
-    if (value > 3) {
+    if (number > 3) {
         return 'basic';
     }
 
-    return [styles.gold, styles.silver, styles.bronze][value.value - 1];
+    return [styles.gold, styles.silver, styles.bronze][number - 1];
 };

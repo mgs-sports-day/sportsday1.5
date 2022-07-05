@@ -19,11 +19,11 @@ export const useDefaultTab = (): [YearGroup | undefined, (newValue: YearGroup) =
     const update = (newValue: YearGroup) => {
         if (isNaN(newValue)) return;
 
-        localStorage.setItem('default_year_group', newValue.toString(10))
-    }
+        localStorage.setItem('default_year_group', newValue.toString(10));
+    };
 
     return [tab, update];
-}
+};
 
 export const formToLink = (formLike: Form | string) => {
     if (typeof formLike === 'string') {
@@ -81,4 +81,33 @@ export const unitNameToSuffix = (unit: Unit) => {
         case 'second':
             return 's';
     }
+};
+
+export const getRankWhere = <T extends object, U extends keyof T, V extends keyof T>(
+    items: T[],
+    key: U,
+    item: T[U],
+    rankBy: V,
+    reverse?: boolean,
+) => {
+    const sorted = Object.assign([], items).sort((a, b) => b[rankBy] - a[rankBy]) as T[];
+    if (reverse) {
+        sorted.reverse();
+    }
+
+    const ranked = sorted.reduce(
+        (a, e): [T, number][] =>
+            [
+                ...a,
+                a.length ? [
+                    e,
+                    e[rankBy] === a.slice(-1)[0][0][rankBy] ?
+                        a.slice(-1)[0][1] :
+                        a.slice(-1)[0][1] + a.filter(e => e[1] === a.slice(-1)[0][1]).length,
+                ] : [e, 1],
+            ],
+        [] as [T, number][],
+    );
+
+    return ranked.filter(e => e[0][key] === item)[0][1];
 };
