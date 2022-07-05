@@ -4,6 +4,8 @@ import { useApiQuery } from '../api/context';
 import ColourCodedFormLabel from './ColourCodedFormLabel';
 import EventDataTable from './EventDataTable';
 
+type ArraySpec<T extends any[]> = T extends (infer U)[] ? U : never;
+
 export default function EventStandingTable(
     {
         year,
@@ -16,8 +18,8 @@ export default function EventStandingTable(
     const standings = useApiQuery(api => api.getEventResults(event, year))[0] as EventResults | undefined;
 
     const forms = standings?.total.map(e => e.letter);
-    const getFormRes = useCallback((form: string, group: keyof EventResults) => {
-        return standings && standings[group].filter(e => e.letter === form)[0];
+    const getFormRes = useCallback(<T extends keyof EventResults>(form: string, group: T) => {
+        return standings && (standings[group].filter(e => e.letter === form)[0] as ArraySpec<EventResults[T]>);
     }, [standings]);
 
     const tableContents = useMemo(() => {
