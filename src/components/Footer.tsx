@@ -5,6 +5,14 @@ export default function Footer() {
         <hr className={styles.divider} />
 
         <p className={styles.disclaimer}>
+            Medal favicon sourced from&nbsp;
+            <a href="https://icons8.com">
+                https://icons8.com
+            </a>
+            .
+        </p>
+
+        <p className={styles.disclaimer}>
             This website is part of a family of co-curricular sites run by students and staff of the Manchester Grammar School.
             The main school website is at&nbsp;
             <a
