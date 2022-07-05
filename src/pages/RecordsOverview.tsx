@@ -1,4 +1,5 @@
 import { EventRecordStanding, YearGroup } from 'mgssportsday-api/dist/types';
+import { useMemo } from 'react';
 import { useApiQuery } from '../api/context';
 import { getRankWhere, useDefaultTab } from '../api/helpers';
 import Breadcrumb from '../components/Breadcrumb';
@@ -68,6 +69,43 @@ export default function RecordsOverview() {
     const [defaultTab, setDefaultTab] = useDefaultTab();
     const [recordSummary] = useApiQuery(api => api.getRecordsSummaryStats());
 
+    const recordSummaryRows = useMemo(() => {
+        return recordSummary && recordSummary.map(yearGroup => (
+            <TableRow
+                key={yearGroup.year}
+                columns={[
+                    { value: yearGroup.year, isHeader: true },
+                    {
+                        value: `${yearGroup.recordsBroken} broken`,
+                        autoHighlight: yearGroup.year !== 'All year groups',
+                        isHeader: yearGroup.year === 'All year groups',
+                        ...(yearGroup.year === 'All year groups' ? {} : {
+                            highlightValue: getRankWhere(
+                                recordSummary.filter(e => e.year !== 'All year groups'),
+                                'year',
+                                yearGroup.year,
+                                'recordsBroken',
+                            ),
+                        }),
+                    },
+                    {
+                        value: `${yearGroup.recordsEqualled} equalled`,
+                        autoHighlight: yearGroup.year !== 'All year groups',
+                        isHeader: yearGroup.year === 'All year groups',
+                        ...(yearGroup.year === 'All year groups' ? {} : {
+                            highlightValue: getRankWhere(
+                                recordSummary.filter(e => e.year !== 'All year groups'),
+                                'year',
+                                yearGroup.year,
+                                'recordsEqualled',
+                            ),
+                        }),
+                    },
+                ]}
+            />
+        ))
+    }, [recordSummary]);
+
     return <>
         <Breadcrumb
             paths={[
@@ -105,43 +143,9 @@ export default function RecordsOverview() {
         </TabSwitcher>
 
         {
-            recordSummary !== undefined &&
-            <Table>
+            recordSummary !== undefined && <Table>
                 {
-                    recordSummary && recordSummary.map(yearGroup => (
-                        <TableRow
-                            key={yearGroup.year}
-                            columns={[
-                                { value: yearGroup.year, isHeader: true },
-                                {
-                                    value: `${yearGroup.recordsBroken} broken`,
-                                    autoHighlight: yearGroup.year !== 'All year groups',
-                                    isHeader: yearGroup.year === 'All year groups',
-                                    ...(yearGroup.year === 'All year groups' ? {} : {
-                                        highlightValue: getRankWhere(
-                                            recordSummary.filter(e => e.year !== 'All year groups'),
-                                            'year',
-                                            yearGroup.year,
-                                            'recordsBroken',
-                                        ),
-                                    }),
-                                },
-                                {
-                                    value: `${yearGroup.recordsEqualled} equalled`,
-                                    autoHighlight: yearGroup.year !== 'All year groups',
-                                    isHeader: yearGroup.year === 'All year groups',
-                                    ...(yearGroup.year === 'All year groups' ? {} : {
-                                        highlightValue: getRankWhere(
-                                            recordSummary.filter(e => e.year !== 'All year groups'),
-                                            'year',
-                                            yearGroup.year,
-                                            'recordsEqualled',
-                                        ),
-                                    }),
-                                },
-                            ]}
-                        />
-                    ))
+                    recordSummaryRows
                 }
             </Table>
         }
