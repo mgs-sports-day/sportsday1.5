@@ -77,7 +77,7 @@ export default function RecordsOverview() {
                     { value: yearGroup.year, isHeader: true },
                     {
                         value: `${yearGroup.recordsBroken} broken`,
-                        autoHighlight: yearGroup.year !== 'All year groups',
+                        autoHighlight: yearGroup.year !== 'All year groups' && yearGroup.recordsBroken > 0,
                         isHeader: yearGroup.year === 'All year groups',
                         ...(yearGroup.year === 'All year groups' ? {} : {
                             highlightValue: getRankWhere(
@@ -90,7 +90,7 @@ export default function RecordsOverview() {
                     },
                     {
                         value: `${yearGroup.recordsEqualled} equalled`,
-                        autoHighlight: yearGroup.year !== 'All year groups',
+                        autoHighlight: yearGroup.year !== 'All year groups' && yearGroup.recordsEqualled > 0,
                         isHeader: yearGroup.year === 'All year groups',
                         ...(yearGroup.year === 'All year groups' ? {} : {
                             highlightValue: getRankWhere(
