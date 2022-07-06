@@ -55,7 +55,7 @@ function AllRecordTable() {
             standingScore: bestStanding && bestStanding[0]?.standingScore || 0,
 
             currentHolder: bestCurrent && bestCurrent[0] ?
-                `${bestCurrent[0].standingHolder} (y${yearGroups[bestCurrent[1]]})` :
+                `${bestCurrent[0].currentHolder} (y${yearGroups[bestCurrent[1]]})` :
                 '',
             currentYear: bestCurrent && bestCurrent[0]?.currentYear || 2021,
             currentScore: bestCurrent && bestCurrent[0]?.currentScore || 0,
