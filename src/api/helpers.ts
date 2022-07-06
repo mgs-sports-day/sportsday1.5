@@ -111,3 +111,7 @@ export const getRankWhere = <T extends object, U extends keyof T, V extends keyo
 
     return ranked.filter(e => e[0][key] === item)[0][1];
 };
+
+export const secondsToMinutes = (seconds: string | number) => (seconds.toString().endsWith('s') || typeof seconds === 'number') 
+    ? `${floor(parseInt(seconds) / 60)}m ${seconds % 60}s`
+    : seconds
