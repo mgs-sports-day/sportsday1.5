@@ -113,5 +113,5 @@ export const getRankWhere = <T extends object, U extends keyof T, V extends keyo
 };
 
 export const secondsToMinutes = (seconds: string | number) => (seconds.toString().endsWith('s') || typeof seconds === 'number') 
-    ? (parseInt(seconds.toString()) >= 60 ? `${Math.floor(parseInt(seconds.toString()) / 60)}m ${parseInt(seconds.toString()) % 60}s` : `${parseInt(seconds.toString())}s`)
+    ? (parseFloat(seconds.toString()) >= 60 ? `${Math.floor(parseFloat(seconds.toString()) / 60)}m ${Math.round(parseFloat(seconds.toString()) % 60)}s` : `${parseFloat(seconds.toString())}s`)
     : seconds
