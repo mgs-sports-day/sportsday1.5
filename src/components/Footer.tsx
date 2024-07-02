@@ -25,7 +25,7 @@ export default function Footer() {
         </p>
 
         <p className={styles.disclaimer}>
-            Website &copy; 2023 Pal Kerecsenyi, Theodore Tucker, Geza Kerecsenyi.&nbsp;
+            Website &copy; 2024 Pal Kerecsenyi, Theodore Tucker, Geza Kerecsenyi.&nbsp;
             <a
                 href='https://github.com/mgs-sports-day/sportsday1.5'
                 target='_blank'

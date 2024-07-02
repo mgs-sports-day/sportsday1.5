@@ -18,8 +18,8 @@ export default function RecordTable(
                         { text: 'Event' },
                         { text: `Record year`, sortable: true },
                         { text: 'Record score', sortable: true },
-                        { text: `2023 best score`, sortable: true },
-                        { text: '2023 champion' },
+                        { text: `2024 best score`, sortable: true },
+                        { text: '2024 champion' },
                     ]}
                 >
                     {
