@@ -34,6 +34,7 @@ export default function EventsList() {
                 <p>
                     <strong>{eventIdToName(eventId)}</strong>
                 </p>,
+// @ts-ignore
                 <Button onClick={() => navigate(`/events/${eventId == "4x300" ? "4x200" : eventId}`)}>
                     View event
                 </Button>
