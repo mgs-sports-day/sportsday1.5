@@ -70,7 +70,7 @@ export const eventIdToName = (event: SportEventName) => {
         case SportEventName.Run4x100:
             return '4x100m';
         case SportEventName.Run4x300:
-            return '4x300m';
+            return '4x200m';
     }
 };
 
