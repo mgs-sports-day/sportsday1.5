@@ -31,7 +31,7 @@ export default function Home() {
 
     return <>
         <HomeMobileMenu />
-        <h1>Welcome to MGS Sports Day 2024!</h1>
+        <h1>Welcome to MGS Sports Day 2025!</h1>
 
         <p>
             This page shows all forms, across the entire school in <strong>rank</strong> order.
